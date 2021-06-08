@@ -78,7 +78,7 @@
     <repositories>
         <repository>
             <id>atlassian-public</id>
-            <url>https://packages.atlassian.com/maven/repository/public</url>
+            <url>https://packages.atlassian.com/maven-external/</url>
         </repository>
     </repositories>
 
