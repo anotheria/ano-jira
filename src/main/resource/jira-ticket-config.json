@@ -1,0 +1,26 @@
+{
+	"enabled" : false,
+	"baseJiraUrl": "https://jira.anotheria.net/",
+	"jiraMasterAcc": "Account inside system. E.g. jiramaster",
+	"jiraMasterPass": "Account inside system pass",
+	"projectKey": "Project short key. E.g.: ATSZ",
+	"epicKey": "Epic number. E.g. ATSZ-1518",
+
+	"defaultSummaryPrefix": "Exception ",
+	"defaultPriority": 3,
+	"defaultReporterName": "Default user to set as reporter. E.g. jiramaster",
+	"defaultAssigneeName": "",
+
+	"labels": [ "Caught_Error_NO_SPACE_IN_LABELS" ],
+
+	"cms": {
+		"enabled" : false,
+		"labels": [ "Caught_Error", "CMS" ]
+	},
+
+	"prod": {
+		"enabled" : true,
+		"labels": [ "Caught_Error", "PROD" ]
+	}
+
+}

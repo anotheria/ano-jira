@@ -21,3 +21,29 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Maven build directory
+target/
+
+# SVN related dir's/files
+.svn/
+
+# Java related dir's/files
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse related dir's/files
+.project
+.metadata
+.classpath
+.settings/
+bin/
+tmp/
+
+# IntelliJ related dir's/files
+*.iml
+*.ipr
+*.iws
+.idea/

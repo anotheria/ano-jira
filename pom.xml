@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>net.anotheria</groupId>
+        <artifactId>parent</artifactId>
+        <version>2.13</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.anotheria</groupId>
+    <artifactId>ano-jira</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <name>jira task processing api</name>
+
+    <properties>
+        <source-version>1.8</source-version>
+        <target-version>1.8</target-version>
+
+        <ano-configureme-version>2.4.1</ano-configureme-version>
+        <ano-plass-version>2.1.5-SNAPSHOT</ano-plass-version>
+        <jira-api-version>5.2.2</jira-api-version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.anotheria</groupId>
+            <artifactId>configureme</artifactId>
+            <version>${ano-configureme-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.anotheria</groupId>
+            <artifactId>ano-plass</artifactId>
+            <version>${ano-plass-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-rest-java-client-core</artifactId>
+            <version>${jira-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-rest-java-client-app</artifactId>
+            <version>${jira-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-rest-java-client-api</artifactId>
+            <version>${jira-api-version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${source-version}</source>
+                    <target>${target-version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <repositories>
+        <repository>
+            <id>atlassian-public</id>
+            <url>https://packages.atlassian.com/maven/repository/public</url>
+        </repository>
+    </repositories>
+
+</project>
