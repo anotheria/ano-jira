@@ -4,6 +4,7 @@
 	"jiraMasterAcc": "Account inside system. E.g. jiramaster",
 	"jiraMasterPass": "Account inside system pass",
 	"projectKey": "Project short key. E.g.: ATSZ",
+	"epicName": "Epic title. E.g. Automatically generated tickets",
 	"epicKey": "Epic number. E.g. ATSZ-1518",
 
 	"defaultSummaryPrefix": "Exception ",

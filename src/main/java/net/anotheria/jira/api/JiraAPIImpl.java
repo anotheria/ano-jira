@@ -37,6 +37,11 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 	 */
 	private static final int MAX_PER_QUERY = 20;
 
+    /**
+     * Search epic ticket by title
+     */
+    private static final String EPIC_SEARCH_QUERY = "project = %s AND \"Epic Name\" = \"%s\" ORDER BY key DESC";
+
 	/**
 	 * Jira ticket check filter
 	 */
@@ -83,7 +88,7 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 			if (exists(searchClient, ticket))
 				return;
 
-            Issue epicIssue = issueClient.getIssue(config.getEpicKey()).claim();
+            Issue epicIssue = getEpicIssue(issueClient, searchClient);
             Iterator<IssueField> attachments  = epicIssue.getFields().iterator();
             String epicLinkFieldId = null;
             while (attachments.hasNext()){
@@ -134,7 +139,23 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 		}
 	}
 
-	/**
+    /**
+     * Get epic issue by name
+     */
+    private Issue getEpicIssue(IssueRestClient issueClient, SearchRestClient searchClient) {
+        JiraTicketConfig config = JiraTicketConfig.getInstance();
+        String searchQuery = String.format(EPIC_SEARCH_QUERY, config.getProjectKey(), config.getEpicName());
+
+        Promise<SearchResult> searchResult = searchClient.searchJql(searchQuery, 1, 1, null);
+        SearchResult results = searchResult.claim();
+        if (results.getTotal() > 0)
+            return results.getIssues().iterator().next();
+
+        Issue issue = issueClient.getIssue(config.getEpicKey()).claim();
+        return  issue;
+    }
+
+    /**
 	 * Get ticket body
 	 */
 	private String getDescription(JiraExceptionTicketPO ticket) {

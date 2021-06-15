@@ -33,6 +33,9 @@ public class JiraTicketConfig {
     private String projectKey;
 
     @Configure
+    private String epicName;
+
+    @Configure
     private String epicKey;
 
     @Configure
@@ -118,6 +121,14 @@ public class JiraTicketConfig {
 
     public void setProjectKey(String projectKey) {
         this.projectKey = projectKey;
+    }
+
+    public String getEpicName() {
+        return epicName;
+    }
+
+    public void setEpicName(String epicName) {
+        this.epicName = epicName;
     }
 
     public String getEpicKey() {
