@@ -146,7 +146,7 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
         JiraTicketConfig config = JiraTicketConfig.getInstance();
         String searchQuery = String.format(EPIC_SEARCH_QUERY, config.getProjectKey(), config.getEpicName());
 
-        Promise<SearchResult> searchResult = searchClient.searchJql(searchQuery, 1, 1, null);
+        Promise<SearchResult> searchResult = searchClient.searchJql(searchQuery, 1, 0, null);
         SearchResult results = searchResult.claim();
         if (results.getTotal() > 0)
             return results.getIssues().iterator().next();
