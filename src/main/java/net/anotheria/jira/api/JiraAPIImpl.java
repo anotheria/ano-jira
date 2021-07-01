@@ -85,10 +85,11 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 			IssueRestClient issueClient = restClient.getIssueClient();
 			SearchRestClient searchClient = restClient.getSearchClient();
 
-			if (exists(searchClient, ticket))
+			Issue epicIssue = getEpicIssue(issueClient, searchClient);
+			if (exists(searchClient, epicIssue, ticket)) {
 				return;
+			}
 
-            Issue epicIssue = getEpicIssue(issueClient, searchClient);
             Iterator<IssueField> attachments  = epicIssue.getFields().iterator();
             String epicLinkFieldId = null;
             while (attachments.hasNext()){
@@ -179,8 +180,8 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 	/**
 	 * Check if same ticket
 	 */
-	private boolean exists(SearchRestClient searchClient, JiraExceptionTicketPO ticket) {
-		String jql = taskFilter.getSearchQuery();
+	private boolean exists(SearchRestClient searchClient, Issue epicIssue, JiraExceptionTicketPO ticket) {
+		String jql = taskFilter.getSearchQuery(epicIssue.getKey());
 
 		int startIndex = 0;
 		while (true) {

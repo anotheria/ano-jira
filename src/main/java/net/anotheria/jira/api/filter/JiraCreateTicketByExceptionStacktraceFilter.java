@@ -44,9 +44,9 @@ public class JiraCreateTicketByExceptionStacktraceFilter implements JiraCreateTi
      * Get search query
      */
     @Override
-    public String getSearchQuery() {
+    public String getSearchQuery(String epicKey) {
         JiraTicketConfig config = JiraTicketConfig.getInstance();
-        return String.format(SEARCH_QUERY, config.getProjectKey(), config.getEpicKey());
+        return String.format(SEARCH_QUERY, config.getProjectKey(), epicKey);
     }
 
     /**

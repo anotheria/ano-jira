@@ -13,7 +13,7 @@ public interface JiraCreateTicketByExceptionFilter {
     /**
      * Jira search query to retrieve all potential similar ticket
      */
-    String getSearchQuery();
+    String getSearchQuery(String epicKey);
 
     /**
      * Check if jira ticker is same as new ticket
