@@ -86,6 +86,11 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 			SearchRestClient searchClient = restClient.getSearchClient();
 
 			Issue epicIssue = getEpicIssue(issueClient, searchClient);
+			if (epicIssue == null) {
+				log.error("No jira Epic found!");
+				return;
+			}
+
 			if (exists(searchClient, epicIssue, ticket)) {
 				return;
 			}
@@ -96,6 +101,7 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
                 IssueField field = attachments.next();
                 if (field.getName().equals("Epic Link")) {
                     epicLinkFieldId = field.getId();
+                    break;
                 }
             }
 
@@ -115,7 +121,7 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 			iib.setAssigneeName(assigneeName);
 			iib.setFieldValue(IssueFieldId.LABELS_FIELD.id, labels);
 			if (epicLinkFieldId != null) {
-                iib.setFieldValue(epicLinkFieldId, config.getEpicKey());
+                iib.setFieldValue(epicLinkFieldId, epicIssue.getKey());
             }
 
 			// samples
@@ -126,7 +132,7 @@ public class JiraAPIImpl extends AbstractAPIImpl implements JiraAPI {
 			IssueInput issue = iib.build();
 			BasicIssue issueObj = issueClient.createIssue(issue).claim();
 
-//			System.out.println("Key : " + issueObj.getKey());
+			log.info("New jira issue key : " + issueObj.getKey());
         } catch (Exception e) {
             log.error("Can't create jira task", e);
         } finally {
